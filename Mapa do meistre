@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+int main(void)
+{
+    char Mapa[100][100], ant;
+    int x, y, i, j;
+    x = 0;
+    y = 0;
+    i= 0;
+    j = 0;
+    int bau = 0;
+
+    scanf("%d %d", &x, &y);
+    for (i = 0; i < y; ++i)
+    {
+        fflush(stdin);
+        scanf("%s", Mapa[i]);
+    }
+
+    i = 0; j = 0;
+    while (Mapa[0][0] != '.')
+    {
+        if (Mapa[i][j] == 'x') break;
+          
+        else if (Mapa[i][j] == '*') { bau = 1; break; }
+          
+        else if (i >= y || i < 0 || j >= x || j < 0) break;
+          
+        else if (Mapa[i][j] == '^') { ant = Mapa[i][j]; Mapa[i][j] = 'x'; i--; }
+          
+        else if (Mapa[i][j] == '>') { ant = Mapa[i][j]; Mapa[i][j] = 'x'; j++; }
+          
+        else if (Mapa[i][j] == 'v') { ant = Mapa[i][j]; Mapa[i][j] = 'x'; i++; }
+          
+        else if (Mapa[i][j] == '<') { ant = Mapa[i][j]; Mapa[i][j] = 'x'; j--; }
+          
+        else if (Mapa[i][j] == '.') {
+          
+                 if (ant == '^') { Mapa[i][j] = 'x'; i--; }
+                   
+            else if (ant == '>') { Mapa[i][j] = 'x'; j++; }
+              
+            else if (ant == 'v') { Mapa[i][j] = 'x'; i++; }
+              
+            else if (ant == '<') { Mapa[i][j] = 'x'; j--; }
+        }
+
+    }
+    printf("%c\n", bau ? '*' : '!');
+    return 0;
+}
